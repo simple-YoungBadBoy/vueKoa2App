@@ -3,10 +3,19 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import { Button, Cell } from "vant";
+import vueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.config.productionTip = false;
 
-Vue.use(Button).use(Cell);
+import { Button, Row, Col, Icon, Field, SwipeItem, Swipe, Lazyload } from "vant";
+Vue.use(Button)
+  .use(Row)
+  .use(Col)
+  .use(Field)
+  .use(SwipeItem)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(Lazyload)
+  .use(Icon);
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
