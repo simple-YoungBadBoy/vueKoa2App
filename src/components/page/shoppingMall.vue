@@ -27,37 +27,29 @@
             <div class="recommend-item">
               <img v-lazy='item.image' width="80%">
               <p>{{item.goodsName}}</p>
-              <p>${{item.price}}(${{item.mallPrice}})</p>
+              <p>${{item.price | moneyFilter}}(${{item.mallPrice | moneyFilter}})</p>
             </div>
           </swiper-slide>
         </swiper>
       </div>
     </div>
+    <floor :floorData='floor1' :floorTitle='floorTitle.floor1'></floor>
+    <floor :floorData='floor2' :floorTitle='floorTitle.floor2'></floor>
+    <floor :floorData='floor3' :floorTitle='floorTitle.floor3'></floor>
 
-    <!-- 数据楼层 -->
-    <div class="floor">
-      <div class="floor-anomaly">
-        <div class="floor-one">
-          <img :src='floor1_0.image' width='100%'>
-        </div>
-        <div class="floor-right">
-          <div class="floor-tow">
-            <img :src='floor1_1.image' width='100%'>
-          </div>
-          <div>
-            <img :src='floor1_2.image' width='100%'>
-          </div>
-        </div>
-      </div>
-    </div>
+    <good-info :hotGoods='hotGoods'></good-info>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import floor from "./../component/floor";
+import goodInfo from "./../component/goodInfo";
 import "swiper/dist/css/swiper.css";
 import { URL } from "@/URL.config.js";
+import { toMoney } from "@/filter/moneyFilter";
 export default {
   data() {
     return {
@@ -73,15 +65,23 @@ export default {
           clickable: true
         }
       },
+      floorTitle: {},
       floor1: [],
-      floor1_0: [],
-      floor1_1: [],
-      floor1_2: []
+      floor2: [],
+      floor3: [],
+      hotGoods: [] //热卖商品
     };
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    floor,
+    goodInfo
+  },
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money);
+    }
   },
   created() {
     axios({
@@ -100,11 +100,17 @@ export default {
           // 商品推荐
           this.recommendGoods = res.data.data.recommend;
 
+          // 楼层名称
+          this.floorTitle = res.data.data.floorName;
+
           // 楼层数据
           this.floor1 = res.data.data.floor1; //楼层1数据
-          this.floor1_0 = this.floor1[0];
-          this.floor1_1 = this.floor1[1];
-          this.floor1_2 = this.floor1[2];
+          this.floor2 = res.data.data.floor2; //楼层1数据
+          this.floor3 = res.data.data.floor3; //楼层1数据
+
+          //热卖商品
+          this.hotGoods = res.data.data.hotGoods;
+          console.log(this.hotGoods);
         }
       })
       .catch(error => {
@@ -168,19 +174,4 @@ export default {
     }
   }
 }
-
-.floor-anomaly {
-  display: flex;
-  flex-direction:row;
-        background-color: #fff;
-        border-bottom:1px solid #ddd;
-}
-.floor-one {
-  border-right: 1px solid #f1f1f1;
-}
-.floor-tow {
-  border-bottom: 1px solid #f1f1f1;
-}
-
-
 </style>

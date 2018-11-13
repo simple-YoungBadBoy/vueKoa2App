@@ -3,10 +3,10 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import vueAwesomeSwiper from 'vue-awesome-swiper'
+
 Vue.config.productionTip = false;
 
-import { Button, Row, Col, Icon, Field, SwipeItem, Swipe, Lazyload } from "vant";
+import { Button, Row, Col, Icon, Field, SwipeItem, Swipe, Lazyload, List } from "vant";
 Vue.use(Button)
   .use(Row)
   .use(Col)
@@ -15,6 +15,7 @@ Vue.use(Button)
   .use(Swipe)
   .use(SwipeItem)
   .use(Lazyload)
+  .use(List)
   .use(Icon);
 /* eslint-disable no-new */
 new Vue({
