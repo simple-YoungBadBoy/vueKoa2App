@@ -6,7 +6,7 @@ import router from "./router";
 
 Vue.config.productionTip = false;
 
-import { Button, Row, Col, Icon, Field, SwipeItem, Swipe, Lazyload, List } from "vant";
+import { Button, Row, Col, Icon, Field, SwipeItem, Swipe, Lazyload, List, NavBar, Toast } from "vant";
 Vue.use(Button)
   .use(Row)
   .use(Col)
@@ -16,6 +16,8 @@ Vue.use(Button)
   .use(SwipeItem)
   .use(Lazyload)
   .use(List)
+  .use(NavBar)
+  .use(Toast)
   .use(Icon);
 /* eslint-disable no-new */
 new Vue({

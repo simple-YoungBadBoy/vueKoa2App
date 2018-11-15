@@ -10,7 +10,7 @@
           <van-icon class="searchIcon" size="1rem" color='gray' name='search'></van-icon>
         </van-col>
         <van-col span="5">
-          <van-icon class="icon" name='contact' color='white'></van-icon>
+          <van-icon class="icon" name='contact' @click="() =>{this.$router.push('/login')}" color='white'></van-icon>
         </van-col>
       </van-row>
     </div>
