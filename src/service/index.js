@@ -9,9 +9,11 @@ app.use(cors());
 app.use(bodyparser());
 const Router = require("koa-router");
 let user = require("./appApi/User");
+let goods = require("./appApi/Goods");
 let router = new Router();
 
 router.use("/user", user.routes());
+router.use("/goods", goods.routes());
 app.use(router.routes());
 app.use(router.allowedMethods());
 (async ctx => {

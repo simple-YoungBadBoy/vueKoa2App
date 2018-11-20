@@ -4,20 +4,22 @@ const db = "mongodb://localhost/smile-db";
 
 mongoose.Promise = global.Promise;
 
-const glob = require('glob')
-const {resolve}  = require('path')
+const glob = require("glob");
+const { resolve } = require("path");
 
 // 引入所有Schema
-exports.initSchemas = () =>{
-  glob.sync(resolve(__dirname,'./schema/','**/*.js')).forEach(require)
-}
-
+exports.initSchemas = () => {
+  glob.sync(resolve(__dirname, "./schema/", "**/*.js")).forEach(require);
+};
 
 return new Promise((resolve, reject) => {
   let maxConnectTimes = 0;
 
   exports.connect = () => {
-    mongoose.connect(db);
+    mongoose.connect(
+      db,
+      { useNewUrlParser: true }
+    );
 
     mongoose.connection.on("disconnected", () => {
       if (maxConnectTimes < 3) {

@@ -37,7 +37,21 @@
     <floor :floorData='floor2' :floorTitle='floorTitle.floor2'></floor>
     <floor :floorData='floor3' :floorTitle='floorTitle.floor3'></floor>
 
-    <good-info :hotGoods='hotGoods'></good-info>
+    <!--Hot Area-->
+    <div class="hot-area">
+      <div class="hot-title">热卖商品</div>
+      <div class="hot-goods">
+        <!--这里需要一个list组件-->
+        <van-list>
+          <van-row gutter='0'>
+            <van-col span='12' v-for="(item,index) in hotGoods" :key="index">
+              <good-info :goodsImage='item.image' :goodsName='item.name' :goodsPrice='item.price' :goodsId='item.goodsId'></good-info>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+
+    </div>
 
   </div>
 </template>
@@ -173,5 +187,12 @@ export default {
       margin: 0.1rem;
     }
   }
+}
+.hot-area {
+  text-align: center;
+  font-size: 14px;
+  height: 1.8rem;
+  line-height: 1.8rem;
+
 }
 </style>
